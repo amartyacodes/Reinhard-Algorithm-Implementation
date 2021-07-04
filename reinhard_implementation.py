@@ -13,8 +13,7 @@ import cv2
 import numpy as np
 from google.colab.patches import cv2_imshow
 def reinhard(source,target):
-  source= cv2.resize(source,(600,600))
-  target= cv2.resize(target,(600,600))
+
   source = cv2.cvtColor(source,cv2.COLOR_RGB2LAB)
   target = cv2.cvtColor(target,cv2.COLOR_RGB2LAB)
   l,a,b = cv2.split(source)
@@ -29,9 +28,11 @@ def reinhard(source,target):
   return result_image
 
 
-source_path ='x.jpg' #Path of the source Image
-target_path = 'y.jpg' #Path of the target Image
+source_path ='/content/Colorectal/image010.bmp' #Path of the source Image
+target_path = '/content/Colorectal/image011.bmp' #Path of the target Image
 source = cv2.imread(source_path)
 target= cv2.imread(target_path)
-cv2_imshow(reinhard(source,target))
+result_image = cv2.cvtColor(reinhard(source,target).astype("uint8"), cv2.COLOR_LAB2RGB)
+# cv2_imshow(reinhard(source,target))
+cv2_imshow(np.hstack((source,target,result_image)))
 
